@@ -67,8 +67,17 @@ $(function () {
     $("#three .square").toggle(500);
   });
 
-  //Accordion example:
-  $("#three h4").click(function () {
-    $("#three p").toggle(1000);
+  //Accordion example (no slide()):
+  $("#three #noSlide h4").click(function () {
+    $("#three #noSlide p").toggle(1000);
+  });
+
+  //fade() (in, out, to, toggle) tampers with opacity (0 <-> 1, up to display: none;), while slide() (in, out, toggle)
+  //fadeTo(timer, targetOpacity) lets you choose ad opacity target value
+  $("#three #slide h4").click(function () {
+    $("#three #slide p").slideToggle(1000);
+  });
+  $("#three #fade h4").click(function () {
+    $("#three #fade p").fadeToggle(1000);
   });
 });
