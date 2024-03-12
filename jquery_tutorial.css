@@ -29,8 +29,11 @@ button {
   margin-inline: auto;
 }
 
-.red-square {
-  background-color: red;
+.light-square {
+  background-color: rgb(183, 240, 178);
+}
+.other-square {
+  background-color: rgb(229, 240, 178);
 }
 
 #three h4,
@@ -43,6 +46,11 @@ button {
 
 #three p {
   display: none;
+}
+
+#four {
+  position: relative;
+  height: 500px;
 }
 
 #four .square {

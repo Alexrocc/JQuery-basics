@@ -55,13 +55,13 @@ $(function () {
 
   /*".show()" and ".hide()" methods remove/add respectively the "display: none;" CSS rule on the specified element.
   ".toggle" alternates the two instead. 
-  It is possible to add a timer attribute to "animate" the event.*/
+  It is possible to add a timer parameter to "animate" the event.*/
 
   $("#three button:first-of-type").click(function () {
-    $("#three .square").show();
+    $("#three .square").show(500);
   });
   $("#three button:nth-of-type(2)").click(function () {
-    $("#three .square").hide();
+    $("#three .square").hide(500);
   });
   $("#three button:last-of-type").click(function () {
     $("#three .square").toggle(500);
@@ -117,4 +117,39 @@ $(function () {
         console.log("third step");
       });
   });
+
+  //Get or set content/values of an element/attribute with text(), html(), val()
+  //text() and html() work the same as innerText and innerHTML
+  $("#five > button").click(function () {
+    $("#five p:first-of-type").text("Text changed with text() method!");
+    $("#five p:nth-of-type(2)").html("Text changed with <strong>html()</strong> <i>method!</i>");
+    $("#five a").attr("href", "https://9gag.com/trending");
+    $("#five a > button").text("Go somewhere else");
+  });
+  //val() can read and modify the value of certain elements, such as inputs, checkboxes, selects
+  //attr() can instead read or modify the value of an element's attribute (above function ^^^)
+  $("#five input").blur(function () {
+    console.log($(this).val());
+    console.log($(this).attr("type"));
+  });
+
+  //Adding content
+  //append() and prepend() generate and place new content after and before the ELEMENT'S CONTENT respectively
+  //after() and before() will instead place said content after or before the ELEMENT ITSELF as placed in the HTML
+  let i = 0;
+  $("#six button").click(function () {
+    if (i === 0) {
+      $("#six p:first-of-type").append("<strong>A</strong>").prepend("<strong>B</strong>");
+      $("#six #surrounded").before("<p>I'm above!</p>").after("<p>I'm below!</p>");
+      i = 1;
+    }
+
+    //Removing content
+    //remove() will delete the target element along with its children. A string parameter can be passed to specify a filter of removable elements, such as a class
+    //empty() will instead delete only the target element's children
+    $("#six .light-square").remove();
+    $("#six .other-square").empty();
+  });
+
+  //CSS with JQuery
 });

@@ -38,20 +38,41 @@
         <p>Sample text</p>
       </div>
     </section>
-    <section id="four" style="position: relative">
+    <section id="four">
       <h3>Animation examples</h3>
       <button type="button" id="start">Start</button>
       <button type="button" id="stop">Stop</button>
-
       <div class="square"></div>
-
       <h3>Animations with chaining ad callbacks</h3>
       <button type="button" id="start2">Start</button>
-
       <div class="square"></div>
     </section>
-    <section id="five"></section>
-    <section></section>
+    <section id="five">
+      <h3>Text, html and attribute reading and modification</h3>
+      <button type="button">Modify</button>
+      <p>Example paragraph with text()</p>
+      <p>Example paragraph with html()</p>
+      <p>The following input and "type" attribute value will be read by the val() and attr() methods on blur</p>
+      <input type="text" />
+      <p>The following anchor "href" attribute will be modified on "Modify" button click</p>
+      <a href="https://www.youtube.com" target="_blank"><button>Go somewhere</button></a>
+    </section>
+    <section id="six">
+      <h3>Adding and removing content</h3>
+      <button type="button">Click me</button>
+      <p>&nbsp;- There will be a B before me and an A after me -&nbsp;</p>
+      <p id="surrounded">I will be surrounded by other paragraphs!</p>
+      <h4>Something will happen to these squares...</h4>
+      <div class="square light-square">
+        <p>Goodbye!</p>
+      </div>
+      <div class="square other-square">
+        <p>Goodbye!</p>
+      </div>
+    </section>
+    <section id="seven"></section>
+    <section id="eight"></section>
+    <section id="nine"></section>
     <script
       src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
