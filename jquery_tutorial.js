@@ -80,4 +80,41 @@ $(function () {
   $("#three #fade h4").click(function () {
     $("#three #fade p").fadeToggle(1000);
   });
+
+  //Animations: basic animations (CSS properties modifications in a set span of time) can be started
+  //with the animate({parameters}, speed, callback) method
+  //To concatenate animations, simply tail another animate(): this will start the second animation after the first one ends (default)
+  //Parameters can be the ending position where the element moves to, ending dimensions, opacity etc. (Colors are supported with the JQuery UI Plugin)
+  //Different classes can also be applied/removed/switched to the element (addClass(), toggleClass(), switchClass(), removeClass())
+  $("#start").click(function () {
+    $("#stop + .square").animate({ left: "250px", width: "100px", height: "160px" }, 1500);
+    $("#stop + .square").animate({ left: "450px", width: "180px", height: "200px" }, 1500);
+    $("#stop + .square").animate({ left: "0", width: "200px", height: "200px" }, 1500);
+  });
+
+  //stop(stopAll, skipAnimation) allows to stop an animation. Without parameters, it will stop the current animation, directly starting the next.
+  //stopAll allows to interrupt all animations, "blocking" the element.
+  //skipAnimation() interrupts the current animation, starting the next AT THE ENDING PARAMETERS OF THE FIRST (example above: the position).
+  //Both parameters are boolean and are "false" by default.
+  $("#stop").click(function () {
+    $("#four .square").stop();
+    // $("#four .square").stop(true);
+    // $("#four .square").stop(false, true);
+  });
+
+  //Chaining: allows to chain multiple animation functions without the need of selector repetition
+  //Also applicable to fade(), slide() etc.
+  //Callback functions can be applied after a method and they will be called after the step
+  $("#start2").click(function () {
+    $("#start2 + .square")
+      .animate({ left: "250px", width: "100px", height: "160px" }, 1500, function () {
+        console.log("first step");
+      })
+      .animate({ left: "450px", width: "180px", height: "200px" }, 1500, function () {
+        console.log("second step");
+      })
+      .animate({ left: "0", width: "200px", height: "200px" }, 1500, function () {
+        console.log("third step");
+      });
+  });
 });
