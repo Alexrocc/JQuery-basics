@@ -56,3 +56,9 @@ button {
 #four .square {
   position: absolute;
 }
+
+/* Custom class */
+.customClass {
+  color: red;
+  font-weight: 700;
+}

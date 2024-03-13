@@ -151,5 +151,68 @@ $(function () {
     $("#six .other-square").empty();
   });
 
-  //CSS with JQuery
+  //CSS with JQuery: it is possible to use addClass(), removeClass(), toggleClass() to manipulate CSS classes on elements
+  //css() method allows to read and manipulate CSS properties on elements
+  $("#seven button").click(function () {
+    $("#seven p:first-of-type").addClass("customClass");
+    $("#seven p:nth-of-type(2)").removeClass("customClass");
+    $("#seven p:nth-of-type(3)").toggleClass("customClass");
+    console.log($("#seven p:nth-of-type(3)").css("color"));
+    //Dimensions: to understand the methods used to read and modify an element's dimensions in JQuery, remember the box model.
+    /*Going inner to outer level, the TOTAL width / height read by the system will be:
+      Content: width() / height()
+      Padding: innerWidth() / innerHeight()
+      Border: outerWidth() / outerHeight()
+      Margin: outerWidth(true) / outerHeight(true)
+    */
+    $("#seven .square").width(500);
+  });
+
+  //DOM Traversing uses the same concept from JS: parent, ancestor, child, sibling, descendant
+  //Methods for the PARENT and the ANCESTOR: parent() [first parent, can be chained], parents() [ALL parents, even <html>], parentsUntil() [specify the last parent excluded]
+  //Methods for CHILD and DESCENDANT: children() [ALL DIRECT children], find() [find the specified target children]
+  //Methods for SIBLING: siblings() [ALL siblings], next() [CLOSEST sibling GOING DOWN THE DOM], nextAll() [ALL SIBLINGS going down the DOM],
+  //nextUntil() [ALL siblings going down UNTIL specified element], prev() [PREVIOUS sibling], prevAll() [ALL previous siblings], prevUntil()
+  $("#eight button").click(function () {
+    // $("#eight p").parent().css({ border: "1px solid red" });
+    $("#eight #sibling").siblings().css({ border: "1px solid red" });
+  });
+
+  //FETCH and AJAX
+  $("#nine button").click(function () {
+    //The method load() can be used to load another file inside an element
+    $("#nine .square").load("hello.txt");
+    //the getJSON() method can be used to get a local JSON file, can use callbacks
+    $.getJSON("test.json", function (data) {
+      console.log(data);
+    });
+    //get() and post() methods fetch data from an API instead.
+    //It is also possible to use ajax() methods (WORKS WITH PHP)
+    //Example of POST with Ajax (not functioning because of missing PHP):
+    $.ajax({
+      url: "test.php",
+      type: "post",
+      data: $(this).serialize(),
+      success: function (res) {
+        console.log(res);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      },
+    });
+
+    //Example of GET (json file)
+    $.ajax({
+      url: "test.json",
+      type: "get",
+      dataType: "json",
+      success: function (res) {
+        console.log(res);
+        $("#nine p").text(res.users[0].nome);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      },
+    });
+  });
 });
