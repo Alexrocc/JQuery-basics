@@ -22,8 +22,8 @@ Works with both tag types and CSS selectors.*/
 /*EVENTS (examples): Events are the main focus of the JQuery library.
 They apply behaviours on the selected elements depending on the events chosen in the functions.
 
-Some events: click, mouseenter, mouseleave, focus (for text inputs), blur (opposite of focus), keypress, submit, change, scroll,
-keydown (keep key pressed), keyup, onload... 
+Some events: click, dblclick, mouseenter, mouseleave, focus (for text inputs), blur (opposite of focus), keypress, submit (remember e.preventDefault()),
+change, scroll, keydown (keep key pressed), keyup, onload, hover... 
 
 Using the ".css()" method, it is possible to alter an element's CSS properties on specific events.
 ".text()" method changes the inner text of said element.
@@ -179,6 +179,10 @@ $(function () {
   });
 
   //FETCH and AJAX
+
+  //WHAT IS AJAX: Asyncronous JavaScript And XML, it is used to load data in the background and display it on the webpage,
+  //without reloading the page itself.
+
   $("#nine button").click(function () {
     //The method load() can be used to load another file inside an element
     $("#nine .square").load("hello.txt");
@@ -186,7 +190,28 @@ $(function () {
     $.getJSON("test.json", function (data) {
       console.log(data);
     });
+
     //get() and post() methods fetch data from an API instead.
+    //$.get("URL", callback(data, status))
+
+    $.get("https://659ebef647ae28b0bd369b17.mockapi.io/steam/games", function (data, status) {
+      //from here you can display and/or manipulate the data you fetch
+      console.log(data);
+      console.log(status);
+    });
+
+    //$.post("URL", body [must respect the api data structure], callback)
+    $.post(
+      "https://659ebef647ae28b0bd369b17.mockapi.io/steam/games",
+      {
+        /*BODY*/
+      },
+      function (data, status) {
+        console.log(data);
+        console.log(status);
+      }
+    );
+
     //It is also possible to use ajax() methods (WORKS WITH PHP)
     //Example of POST with Ajax (not functioning because of missing PHP):
     $.ajax({
@@ -216,3 +241,5 @@ $(function () {
     });
   });
 });
+
+//EXTRA, animations and scrolling animations: CHECK WAYPOINTS AND ANIMATE.CSS
