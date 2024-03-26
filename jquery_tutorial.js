@@ -242,4 +242,49 @@ $(function () {
   });
 });
 
-//EXTRA, animations and scrolling animations: CHECK WAYPOINTS AND ANIMATE.CSS
+/*WAYPOINTS: this small plugin allows you to select specific elements to use as triggers during scolling, allowing for simplified
+onScroll animations and scripts to trigger once the selected element reaches the top of the page.
+To add to the document, simply add the CDN:
+WITH VANILLA JS - https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js
+WITH JQUERY - https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js
+
+FOR VANILLA JS:
+The plugin adds the Waypoint class, which can contain several options.
+The MANDATORY properties are "element" and "handler".
+"Element" is the DOM element observed during the scroll, while the "handler" is the function triggered once the "element" reaches the top of the viewport.
+It is possible to limit the trigger or to trigger different functions depending on the DIRECTION of the scroll, by simply adding a direction
+as a parameter of the "handler" function.
+Also, you can set the waypoint at different "offset"s compared to the "element". This offset can take several measurements, like px and %.
+
+The "this" keyword inside a Waypoint class is, as with all other classes, referred to the SINGLE INSTANCE of that class.
+
+BASIC EXAMPLE:
+
+let waypoint = new Waypoint({
+  element: document.getElementById("waypoint")
+  handler: function(direction) {
+    notify(`${this.element.id} triggered while scrolling ${direction} here ${this.triggerPoint}`)
+  },
+  offset: "50%"
+})
+
+More here: http://imakewebthings.com/waypoints/api/waypoint/
+
+BASIC EXAMPLE IN JQUERY:
+
+$("#element").waypoint(function(){
+  some instructions
+}, { offset: 50% })
+*/
+
+/*
+ANIMATE.CSS: a class-based library comprised of about 100 ready-made CSS animations. To apply, simply use the CDN on a <link> tag:
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/> 
+To use this library's animations, simply add the MANDATORY general class: animate__animated, followed by any animation class in the library
+EXAMPLE: class = "animate__animated animate__bounce"
+
+It is also possible to customize many aspects of these animation by simply using CSS rules:
+.animate__bounce{
+  animation-delay: 200
+}
+*/
