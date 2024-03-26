@@ -283,6 +283,10 @@ ANIMATE.CSS: a class-based library comprised of about 100 ready-made CSS animati
 To use this library's animations, simply add the MANDATORY general class: animate__animated, followed by any animation class in the library
 EXAMPLE: class = "animate__animated animate__bounce"
 
+or do it using JQuery:
+
+$("#element").addClass("animate__animated animate__fadeInRight")
+
 It is also possible to customize many aspects of these animation by simply using CSS rules:
 .animate__bounce{
   animation-delay: 200
