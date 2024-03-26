@@ -253,10 +253,39 @@ The plugin adds the Waypoint class, which can contain several options.
 The MANDATORY properties are "element" and "handler".
 "Element" is the DOM element observed during the scroll, while the "handler" is the function triggered once the "element" reaches the top of the viewport.
 It is possible to limit the trigger or to trigger different functions depending on the DIRECTION of the scroll, by simply adding a direction
-as a parameter of the "handler" function.
-Also, you can set the waypoint at different "offset"s compared to the "element". This offset can take several measurements, like px and %.
+as a STRING parameter of the "handler" function.
+Also, you can set the waypoint at different "offset"s compared to the "element". This offset can take several measurements, like px and %, as well as return value from functions.
+The "context" option defines which element will be the context for the waypoint trigger (which is "window" by default). This can be useful for
+inner-scrolling sections with overflow. In this case, the "offset" will be calculated depending on the "context" and not the window itself.
+The "horizontal" option allows to change the waypoint axis reference from Y axis to X axis, changing the "direction" values to "right" and "left".
+"horizontal" is a boolean option, and is set false by default.
+"group" is an option which accepts string values (group name) and logically groups together a number of waypoints which allows the use of some group-based methods.
+Default group is "default", all waypoints have this group name upon creation unless differently specified.
+"continuous" is a boolean option applies when a single scroll events would trigger multiple waypoints. Commonly, this applies with "Jump to" buttons on
+websites that bring the view below/above a certain point. This is a GROUP BASED option.
+By default is set to "true" and a skip will trigger ALL continuous waypoints in order, modifying it to "false" will make only the last element OF EACH GROUP PRESENT trigger the waypoint when using the same-page link.
+This option's scope is limited to the SINGLE WAYPOINT and has to be set for each waypoint individually as necessary.
 
-The "this" keyword inside a Waypoint class is, as with all other classes, referred to the SINGLE INSTANCE of that class.
+The "this" keyword inside a Waypoint class is, as with all other JS classes, referred to the SINGLE INSTANCE of that class.
+
+Some convenience class and instance methods are also included:
+CLASS METHODS: destroyAll(), disableAll(), enableAll(), refreshAll(), viewportHeight(), viewportWidth() [last 2 checks height and width of the window. They work around iOS inconsistencies and for "offset" calculations]
+About refreshAll():This method needs to be called whenever you make changes to the DOM, CSS, or anything that may effect the layout and positioning of elements on the page. 
+It is called automatically when the window is resized, so it only needs to be called manually when layout changes happen outside of a resize.
+
+offset: function() {
+  return Waypoint.viewportHeight() - this.element.clientHeight
+}
+
+INSTANCE METHODS: destroy(), disable(), enable(), next(), previous() [allow to identify the next and previous waypoints in a group, else returns null]
+
+WAYPOINT.CONTEXT SPECIFIC METHODS: destroy() [destroys ALL waypoints inside a certain context], refresh() [forces a ricalculation of all WP inside a context]
+Context.findByElement(element) will instead return the CONTEXT INSTANCE associated with the parameter element, else undefined.
+let context = Waypoint.Context.findByElement(element)
+  context.destroy()
+
+let context = Waypoint.Context.findByElement(element)
+  context.refresh()
 
 BASIC EXAMPLE:
 
@@ -265,7 +294,9 @@ let waypoint = new Waypoint({
   handler: function(direction) {
     notify(`${this.element.id} triggered while scrolling ${direction} here ${this.triggerPoint}`)
   },
-  offset: "50%"
+  offset: "50%",
+  context: document.querySelector("#contextElement"),
+  horizontal: true
 })
 
 More here: http://imakewebthings.com/waypoints/api/waypoint/
@@ -274,7 +305,7 @@ BASIC EXAMPLE IN JQUERY:
 
 $("#element").waypoint(function(){
   some instructions
-}, { offset: 50% })
+}, { offset: 50%, context: "#context-element" })
 */
 
 /*
